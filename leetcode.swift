@@ -130,5 +130,36 @@ class Solution {
         
         
     }
+    
+    // 88. 合并两个有序数组
+    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        let m1 = m > nums1.count ? nums1.count:m
+        let n1 = n > nums2.count ? nums2.count:n
+        // 设置岗哨值
+        var index1 = 0
+        var index2 = 0
+        var finalNums = [Int]()
+        while (index1 < m1 || index2 < n1) {
+            if index1 >= m1 {
+                finalNums.append(nums2[index2])
+                index2+=1
+                continue
+            } else if index2 >= n1 {
+                finalNums.append(nums1[index1])
+                index1+=1
+                continue
+            }
+            
+            if nums1[index1] > nums2[index2] {
+                finalNums.append(nums2[index2])
+                index2+=1
+            } else {
+                finalNums.append(nums1[index1])
+                index1+=1
+            }
+            
+        }
+        nums1 = finalNums
+    }
 
 }
