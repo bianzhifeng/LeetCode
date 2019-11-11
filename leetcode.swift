@@ -162,4 +162,30 @@ class Solution {
         nums1 = finalNums
     }
 
+    // 42. 接雨水
+    func trap(_ height: [Int]) -> Int {
+        var trapCount = 0
+        for i in 0..<height.count {
+            var last = height[i]
+            var next = height[i]
+            let current = height[i]
+            for j in 0..<i {
+                if height[j] > last {
+                    last = height[j]
+                }
+            }
+            for j in (i+1)..<height.count {
+                if height[j] > next {
+                    next = height[j]
+                }
+            }
+            
+            if last > current, next > current {
+                trapCount+=(last > next ? next - current:last - current)
+            }
+            
+        }
+        
+        return trapCount
+    }
 }
