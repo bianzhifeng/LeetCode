@@ -162,7 +162,7 @@ class Solution {
         nums1 = finalNums
     }
 
-    // 42. 接雨水
+    // 42. 接雨水O(n*n)
     func trap(_ height: [Int]) -> Int {
         var trapCount = 0
         for i in 0..<height.count {
@@ -187,5 +187,34 @@ class Solution {
         }
         
         return trapCount
+    }
+    // 42. 接雨水优化版本O(n)
+    func trap(_ height: [Int]) -> Int {
+        guard height.count > 0 else { return 0 }
+        var trapCount = 0
+        var maxIndex = 0
+        for i in 0..<height.count {
+            if height[i] > height[maxIndex] {
+                maxIndex = i
+            }
+        }
+
+        var last = height[0]
+        for j in 0..<maxIndex {
+            if height[j] < last {
+                trapCount+=(last - height[j])
+            } else {
+                last = height[j]
+            }
+        }
+
+        var next = height[height.count - 1]
+        for j in ((maxIndex + 1)..<height.count).reversed() {
+            if height[j] < next {
+                trapCount+=(next - height[j])
+            } else {
+                next = height[j]
+            }
+        }
     }
 }
